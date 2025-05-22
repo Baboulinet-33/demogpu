@@ -36,6 +36,11 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          env:
+          - name: HTTP_PROXY
+            value: http://proxydc-sir.dtct.minint.fr:3128
+          - name: HTTPS_PROXY
+            value: http://proxydc-sir.dtct.minint.fr:3128
           image: "{{ .Values.image.registry }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- with .Values.livenessProbe }}

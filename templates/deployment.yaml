@@ -36,10 +36,7 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          image: nvcr.io/nvidia/k8s/cuda-sample:vectoradd-cuda11.7.1-ubuntu20.04
-          command: ["/bin/bash", "-c", "--"]
-          args:
-            - while true; do /cuda-samples/vectorAdd; done
+          image: {{ .Values.image.registry }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- with .Values.livenessProbe }}
           livenessProbe:

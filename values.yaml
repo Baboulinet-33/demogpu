@@ -49,8 +49,12 @@ securityContext: {}
 resources: 
   requests:
     nvidia.com/gpu: 1
+    cpu: 100m
+    memory: 128Mi
   limits:
     nvidia.com/gpu: 1
+    cpu: 100m
+    memory: 128Mi
   # limits:
   #   cpu: 100m
   #   memory: 128Mi

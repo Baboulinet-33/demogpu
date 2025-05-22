@@ -7,7 +7,8 @@ replicaCount: 1
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
-  registry: "registry.dso.interieur.rie.gouv.fr/dockerhub/universonic/stable-diffusion-webui:latest"
+  registry: "registry.dso.interieur.rie.gouv.fr/dockerhub/universonic/stable-diffusion-webui"
+  tag: "full"
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
 
@@ -50,12 +51,12 @@ securityContext: {}
 resources: 
   requests:
     nvidia.com/gpu: 1
-    cpu: 100m
-    memory: 128Mi
+    cpu: 2
+    memory: 4Gi
   limits:
     nvidia.com/gpu: 1
-    cpu: 100m
-    memory: 128Mi
+    cpu: 2
+    memory: 4Gi
   # limits:
   #   cpu: 100m
   #   memory: 128Mi

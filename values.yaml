@@ -92,14 +92,23 @@ ingress:
 #     port: http
 
 # Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+volumes:
+- name: cache
+  ephemeral:
+    volumeClaimTemplate:
+      metadata:
+        labels:
+          type: data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 60Gi
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
+volumeMounts:
+- name: cache
+  mountPath: /.cache/
 # - name: foo
 #   mountPath: "/etc/foo"
 #   readOnly: true

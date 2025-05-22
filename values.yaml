@@ -104,24 +104,12 @@ volumes:
         resources:
           requests:
             storage: 60Gi
-- name: home
-  ephemeral:
-    volumeClaimTemplate:
-      metadata:
-        labels:
-          type: data
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        resources:
-          requests:
-            storage: 10Gi
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
 - name: cache
   mountPath: /.cache/
-- name: home
-  mountPath: /home/workspace/ComfyUI
+
 # - name: foo
 #   mountPath: "/etc/foo"
 #   readOnly: true

@@ -7,9 +7,20 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+    - port: 1111
+      targetPort: 1111
+      name: serviceportal
+    - port: 8188
+      targetPort: 8188
+      name: comfy
+    - port: 8888
+      targetPort: 8888
+      name: jupyter
+    - port: 8384
+      targetPort: 8384
+      name: syncthign
+    - port: 22999
+      targetPort: 22999
+      name: transport
   selector:
     {{- include "demogpu.selectorLabels" . | nindent 4 }}

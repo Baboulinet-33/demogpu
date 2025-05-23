@@ -57,7 +57,7 @@ resources:
   limits:
     nvidia.com/gpu: 1
     cpu: 2
-    memory: 4Gi
+    memory: 8Gi
 
 # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
 service:
@@ -72,10 +72,26 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
+    - host: serviceportal.demogpu.d436.dev.forge.minint.fr
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          servicePort: 1111
     - host: comfy.demogpu.d436.dev.forge.minint.fr
       paths:
         - path: /
           pathType: ImplementationSpecific
+          servicePort: 8188
+    - host: jupyter.demogpu.d436.dev.forge.minint.fr
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          servicePort: 8888
+    - host: syncthing.demogpu.d436.dev.forge.minint.fr
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          servicePort: 8384
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
@@ -94,16 +110,8 @@ ingress:
 # Additional volumes on the output Deployment definition.
 volumes:
 - name: checkpoints
-  ephemeral:
-    volumeClaimTemplate:
-      metadata:
-        labels:
-          type: data
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        resources:
-          requests:
-            storage: 60Gi
+  persistentVolumeClaim:
+    claimName: checkpoint
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:

@@ -36,11 +36,28 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          ports:
+            - containerPort: 1111
+            - containerPort: 8188
+            - containerPort: 8384
+            - containerPort: 8888
           env:
           - name: HTTP_PROXY
             value: http://10.224.32.127:80
           - name: HTTPS_PROXY
             value: http://10.224.32.127:80
+          - name: SERVICEPORTAL_URL
+            value: http://serviceportal.demogpu.d436.dev.forge.minint.fr
+          - name: WEB_ENABLE_AUTH
+            value: "false"
+          - name: COMFYUI_URL
+            value: http://comfy.demogpu.d436.dev.forge.minint.fr
+          - name: JUPYTER_URL
+            value: http://jupyter.demogpu.d436.dev.forge.minint.fr
+          - name: SYNCTHING_URL
+            value: http://syncthing.demogpu.d436.dev.forge.minint.fr
+
+
           image: "{{ .Values.image.registry }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- with .Values.livenessProbe }}
